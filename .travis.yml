@@ -7,5 +7,4 @@ script:
 after_success:
   - sudo apt-get update
   - sudo apt-get install sshpass
-  - sshpass -p $EC2_PASSWORD ssh cd@$EC2_IP
-  - scp -rp . cd@$EC2_IP:/opt/application -o StrictHostKeyChecking=no
+  - sshpass -p $EC2_PASSWORD -e scp -o StrictHostKeyChecking=no . -rp cd@$EC2_IP:/opt/application

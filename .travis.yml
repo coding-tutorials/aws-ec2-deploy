@@ -8,4 +8,6 @@ after_success:
   - sudo apt-get update
   - sudo apt-get install sshpass
   - tar -czf deploy.tar.gz .
+  - sshpass -p $EC2_PASSWORD ssh cd@$EC2_IP "rm -rf /opt/application/*"
   - sshpass -p $EC2_PASSWORD scp -o StrictHostKeyChecking=no -rp deploy.tar.gz cd@$EC2_IP:/opt/application
+  - sshpass -p $EC2_PASSWORD ssh cd@$EC2_IP "tar -zxf deploy.tar.gz ."

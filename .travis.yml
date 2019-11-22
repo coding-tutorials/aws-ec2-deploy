@@ -6,4 +6,4 @@ script:
   - npm test
 after_success:
   - sshpass -p $EC2_PASSOWORD ssh cd@$EC2_IP
-  - scp -rp . cd@$EC2_IP:/opt/application
+  - scp -rp . cd@$EC2_IP:/opt/application -o StrictHostKeyChecking=no

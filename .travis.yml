@@ -5,5 +5,6 @@ install:
 script:
   - npm test
 after_success:
+  - sudo apt-get install sshpass
   - sshpass -p $EC2_PASSOWORD ssh cd@$EC2_IP
   - scp -rp . cd@$EC2_IP:/opt/application -o StrictHostKeyChecking=no

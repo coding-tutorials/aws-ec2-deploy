@@ -1,3 +1,4 @@
+ls
 # install sshpass to by pass password manual ask
 sudo apt-get update
 sudo apt-get install sshpass
@@ -11,7 +12,7 @@ sshpass -p $INSTANCE_PASSWORD scp -o StrictHostKeyChecking=no -rp deploy.tar.gz 
 # start the new application version
 sshpass -p $INSTANCE_PASSWORD ssh cd@$INSTANCE_IP << EOF
   mv /opt/application/current /opt/application/$(date +"%Y-%m-%d_%H-%M-%S")
-  kill -9 $(ps aux | grep '\snode\s' | awk '{print $2}')
+  killall node
   tar -zxf /opt/application/deploy.tar.gz /opt/application/current
   rm /opt/application/deploy.tar.gz
   mkdir /opt/application/current

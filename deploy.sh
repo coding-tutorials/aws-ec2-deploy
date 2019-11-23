@@ -1,9 +1,8 @@
-ls
 # install sshpass to by pass password manual ask
 sudo apt-get update
 sudo apt-get install sshpass
 # compress files to deploy
-tar -czf deploy.tar.gz .
+tar -czf deploy.tar.gz *
 # upload compressed files to the server
 sshpass -p $INSTANCE_PASSWORD scp -o StrictHostKeyChecking=no -rp deploy.tar.gz cd@$INSTANCE_IP:/opt/application
 # stop running application

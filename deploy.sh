@@ -14,8 +14,8 @@ sshpass -p $INSTANCE_PASSWORD ssh cd@$INSTANCE_IP << EOF
   mv /opt/application/current /opt/application/$(date +"%Y-%m-%d_%H-%M-%S")
   mkdir /opt/application/current
   mv /opt/application/deploy.tar.gz /opt/application/current/deploy.tar.gz
-  tar -zxf /opt/application/current/deploy.tar.gz
-  rm /opt/application/current/deploy.tar.gz
+  
+  
   cd /opt/application/current
   npm install
   npm start

@@ -4,5 +4,5 @@ install:
   - npm install
 script:
   - npm test
-after_success:
+deploy:
   - bash ./deploy.sh

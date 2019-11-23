@@ -14,6 +14,7 @@ sshpass -p $INSTANCE_PASSWORD ssh cd@$INSTANCE_IP << EOF
   kill -9 $(ps aux | grep '\snode\s' | awk '{print $2}')
   tar -zxf /opt/application/deploy.tar.gz /opt/application/current
   rm /opt/application/deploy.tar.gz
+  mkdir /opt/application/current
   cd /opt/application/current
   npm install
   npm start

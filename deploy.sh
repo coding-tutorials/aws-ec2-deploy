@@ -5,6 +5,8 @@ sudo apt-get install sshpass
 tar -cvzf deploy.tar.gz *
 # upload compressed files to the server
 sshpass -p $INSTANCE_PASSWORD scp -o StrictHostKeyChecking=no -rp deploy.tar.gz cd@$INSTANCE_IP:/opt/application
+# delete compressed file after sent
+rm deploy.tar.gz
 # stop running application
 # rename current directory version to be able to rollback it if necessary
 # extract the new downloaded version as current
@@ -13,9 +15,8 @@ sshpass -p $INSTANCE_PASSWORD ssh cd@$INSTANCE_IP << EOF
   killall node
   mv /opt/application/current /opt/application/$(date +"%Y-%m-%d_%H-%M-%S")
   mkdir /opt/application/current
-  mv /opt/application/deploy.tar.gz /opt/application/current/deploy.tar.gz
-  
-  
+  tar -zxf /opt/application/deploy.tar.gz -C /opt/application/current/
+  rm /opt/application/deploy.tar.gz
   cd /opt/application/current
   npm install
   npm start

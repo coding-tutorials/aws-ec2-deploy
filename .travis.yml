@@ -5,4 +5,5 @@ install:
 script:
   - npm test
 deploy:
-  - bash ./deploy.sh
+  provider: script
+  script: bash ./deploy.sh

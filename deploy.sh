@@ -10,10 +10,12 @@ sshpass -p $INSTANCE_PASSWORD scp -o StrictHostKeyChecking=no -rp deploy.tar.gz 
 # extract the new downloaded version as current
 # start the new application version
 sshpass -p $INSTANCE_PASSWORD ssh cd@$INSTANCE_IP << EOF
-  mv /opt/application/current /opt/application/$(date +"%Y-%m-%d_%H-%M-%S")
   killall node
-  tar -zxf /opt/application/deploy.tar.gz /opt/application/current
+  mv /opt/application/current /opt/application/$(date +"%Y-%m-%d_%H-%M-%S")
   mkdir /opt/application/current
+  mv /opt/application/deploy.tar.gz /opt/application/current/deploy.tar.gz
+  tar -zxf /opt/application/current/deploy.tar.gz
+  rm /opt/application/current/deploy.tar.gz
   cd /opt/application/current
   npm install
   npm start

@@ -4,7 +4,7 @@ sudo apt-get install sshpass
 # compress files to deploy
 tar -cvzf deploy.tar.gz *
 # upload compressed files to the server
-sshpass -p $INSTANCE_PASSWORD scp -o StrictHostKeyChecking=no -rp deploy.tar.gz cd@$INSTANCE_IP:/opt/application
+sshpass -p $INSTANCE_PASSWORD scp -o StrictHostKeyChecking=no -rp deploy.tar.gz cduser@$INSTANCE_IP:/opt/application
 # delete compressed file after sent
 rm deploy.tar.gz
 # stop running application
@@ -12,7 +12,7 @@ rm deploy.tar.gz
 # extract the new downloaded version as current
 # download dependencies
 # start the new application version
-sshpass -p $INSTANCE_PASSWORD ssh cd@$INSTANCE_IP << EOF
+sshpass -p $INSTANCE_PASSWORD ssh cduser@$INSTANCE_IP << EOF
   sudo systemctl stop myapplication
   mv /opt/application/current /opt/application/$(date +"%Y-%m-%d_%H-%M-%S")
   mkdir /opt/application/current

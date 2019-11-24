@@ -7,7 +7,7 @@ app.get('/', (_, res) => {
 })
 
 app.get('/version', (_, res) => {
-  res.send('published at 2019-11-22 14:23')
+  res.send('published at 2019-11-23 22:32')
 })
 
 app.listen(3000, () => console.log('listening on :3000'))

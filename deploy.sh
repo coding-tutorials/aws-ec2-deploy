@@ -8,16 +8,17 @@ sshpass -p $INSTANCE_PASSWORD scp -o StrictHostKeyChecking=no -rp deploy.tar.gz 
 # delete compressed file after sent
 rm deploy.tar.gz
 # stop running application
-# rename current directory version to be able to rollback it if necessary
+# move current application files to a backup directory
 # extract the new downloaded version as current
+# download dependencies
 # start the new application version
 sshpass -p $INSTANCE_PASSWORD ssh cd@$INSTANCE_IP << EOF
-  killall node
+  sudo systemctl stop myapplication
   mv /opt/application/current /opt/application/$(date +"%Y-%m-%d_%H-%M-%S")
   mkdir /opt/application/current
   tar -zxf /opt/application/deploy.tar.gz -C /opt/application/current/
   rm /opt/application/deploy.tar.gz
   cd /opt/application/current
   npm install
-  npm start
+  sudo systemctl start myapplication
 EOF
